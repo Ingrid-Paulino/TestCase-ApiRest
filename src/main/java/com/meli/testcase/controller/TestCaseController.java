@@ -61,7 +61,6 @@ public class TestCaseController {
         return new ResponseEntity<>(lastUpdateData, HttpStatus.OK);
     }  // http://localhost:8080/api/testcases?last_update="2017-11-27T18:13:24"
 
-    // TODO: fazer um deleteAll
     @DeleteMapping
     public ResponseEntity<String> deleteAll() {
         return new ResponseEntity<>(service.deleteAll(),HttpStatus.NO_CONTENT);

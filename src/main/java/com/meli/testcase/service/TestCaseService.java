@@ -29,7 +29,6 @@ public class TestCaseService implements ITestCaseService {
 
     @Override
     public Optional<TestCaseBD> findById(Long id) throws NotFoundException {
-        // TODO: pesquisar se não existe uma forma de procurar e retornar um unico valor ao emves de uma lista
         List<TestCaseBD> existTestCase = findAll().stream()
                 .filter(t -> t.getId_case() == id)
                 .collect(Collectors.toList());
@@ -41,7 +40,6 @@ public class TestCaseService implements ITestCaseService {
 
     @Override
     public TestCaseBD update(TestCaseBD testCase, Long id) throws NotFoundException {
-        // TODO: em java nn tem função asiincrona?
         findById(id);
         testCase.setLast_update(LocalDateTime.now());
         return repo.save(testCase);
