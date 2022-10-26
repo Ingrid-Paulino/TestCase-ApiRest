@@ -36,6 +36,5 @@ public class TestCaseBD {
     private Integer number_of_tries;
 
     @Column(nullable = false)
-    //@NotNull(message = "The last_update of the testCase cannot be empty.")
     private LocalDateTime last_update;
 }
