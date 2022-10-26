@@ -41,7 +41,12 @@ public class TestCaseController {
         return new ResponseEntity<>(TestCaseUpdated, HttpStatus.OK);
     } // http://localhost:8080/api/testcases/1
 
-    // TODO: Implementar atualizaçaõ com o patch (campos: tested, passed, number_of_ tries)
+    @PatchMapping("/{id}")
+    public ResponseEntity<TestCaseBD> updateTestedPassedAndNumberOfTries(@RequestBody TestCaseBD testCaseUpdate,
+                                                                         @PathVariable Long id) throws NotFoundException {
+        TestCaseBD testCaseupdated = service.updateTestedPassedAndNumberOfTries(testCaseUpdate, id);
+        return new ResponseEntity<>(testCaseupdated, HttpStatus.OK);
+    } // http://localhost:8080/api/testcases/2
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable(value="id") Long id) throws NotFoundException {
@@ -55,4 +60,10 @@ public class TestCaseController {
         List<TestCaseBD> lastUpdateData = service.getAllByLastUpdateData(last_update);
         return new ResponseEntity<>(lastUpdateData, HttpStatus.OK);
     }  // http://localhost:8080/api/testcases?last_update="2017-11-27T18:13:24"
+
+    // TODO: fazer um deleteAll
+    @DeleteMapping
+    public ResponseEntity<String> deleteAll() {
+        return new ResponseEntity<>(service.deleteAll(),HttpStatus.NO_CONTENT);
+    } // http://localhost:8080/api/testcases
 }

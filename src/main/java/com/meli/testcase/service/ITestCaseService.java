@@ -12,5 +12,7 @@ public interface ITestCaseService {
     Optional<TestCaseBD> findById(Long id) throws NotFoundException;
     TestCaseBD update(TestCaseBD testCase, Long id) throws NotFoundException;
     void delete(Long id) throws NotFoundException;
-    List<TestCaseBD> getAllByLastUpdateData(String last_update)
-;}
+    String deleteAll();
+    List<TestCaseBD> getAllByLastUpdateData(String last_update);
+    TestCaseBD updateTestedPassedAndNumberOfTries(TestCaseBD testCaseUpdate, Long id) throws NotFoundException;
+}

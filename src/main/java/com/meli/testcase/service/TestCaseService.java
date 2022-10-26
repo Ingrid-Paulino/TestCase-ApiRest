@@ -54,7 +54,24 @@ public class TestCaseService implements ITestCaseService {
     }
 
     @Override
+    public String deleteAll() {
+        repo.deleteAll();
+        return "Todos os registros de caso de teste foram deletados.";
+    }
+
+    @Override
     public List<TestCaseBD> getAllByLastUpdateData(String last_update) {
         return repo.findAllByDescriptionContaining(last_update);
+    }
+
+    @Override
+    public TestCaseBD updateTestedPassedAndNumberOfTries(TestCaseBD testCaseUpdate, Long id) throws NotFoundException {
+        Optional<TestCaseBD> foundTestCase = findById(id);
+        TestCaseBD testcase = foundTestCase.get();
+        testcase.setTested(testCaseUpdate.getTested());
+        testcase.setPassed(testCaseUpdate.getPassed());
+        testcase.setNumber_of_tries(testCaseUpdate.getNumber_of_tries());
+        testcase.setLast_update(LocalDateTime.now());
+        return repo.save(testcase);
     }
 }
