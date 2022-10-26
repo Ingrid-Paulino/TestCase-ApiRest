@@ -48,12 +48,13 @@ public class TestCaseService implements ITestCaseService {
     }
 
     @Override
-    public void delete(Long id) {
-
+    public void delete(Long id) throws NotFoundException {
+        findById(id);
+        repo.deleteById(id);
     }
 
     @Override
-    public List<TestCaseBD> findAll(String last_update_data) {
-        return null;
+    public List<TestCaseBD> getAllByLastUpdateData(String last_update) {
+        return repo.findAllByDescriptionContaining(last_update);
     }
 }

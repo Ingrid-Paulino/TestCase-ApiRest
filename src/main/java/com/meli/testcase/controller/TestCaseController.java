@@ -21,25 +21,38 @@ public class TestCaseController {
     @PostMapping("/new")
     public ResponseEntity<TestCaseBD> insert(@RequestBody TestCaseBD testCase) {
         return new ResponseEntity<>(service.insert(testCase), HttpStatus.CREATED);
-    }
+    } // http://localhost:8080/api/testcases/new
 
     @GetMapping
     public ResponseEntity<List<TestCaseBD>> findAll() {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
-    }
+    } // http://localhost:8080/api/testcases
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<TestCaseBD>> findById(@PathVariable long id) throws NotFoundException {
         Optional<TestCaseBD> optionalTestCase = service.findById(id);
         return new ResponseEntity<>(optionalTestCase, HttpStatus.OK);
-    }
+    } //http://localhost:8080/api/testcases/1
 
     @PutMapping("/{id}")
     public ResponseEntity<TestCaseBD> update(@PathVariable(value="id") Long id,
                                          @RequestBody TestCaseBD testCase)  throws NotFoundException {
         TestCaseBD TestCaseUpdated = service.update(testCase, id);
         return new ResponseEntity<>(TestCaseUpdated, HttpStatus.OK);
-    }
+    } // http://localhost:8080/api/testcases/1
 
-    // TODO: Implementar atualizaçaõ com o patch
+    // TODO: Implementar atualizaçaõ com o patch (campos: tested, passed, number_of_ tries)
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable(value="id") Long id) throws NotFoundException {
+        service.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    } // http://localhost:8080/api/testcases/1
+
+    @PutMapping
+    public ResponseEntity<List<TestCaseBD>> getAllByLastUpdateData(@RequestParam String last_update,
+                                                                   @RequestBody TestCaseBD testCase) {
+        List<TestCaseBD> lastUpdateData = service.getAllByLastUpdateData(last_update);
+        return new ResponseEntity<>(lastUpdateData, HttpStatus.OK);
+    }  // http://localhost:8080/api/testcases?last_update="2017-11-27T18:13:24"
 }
