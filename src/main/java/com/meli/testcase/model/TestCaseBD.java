@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -35,6 +36,6 @@ public class TestCaseBD {
     private Integer number_of_tries;
 
     @Column(nullable = false)
-    @NotNull(message = "The last_update of the testCase cannot be empty.")
-    private Date last_update;
+    //@NotNull(message = "The last_update of the testCase cannot be empty.")
+    private LocalDateTime last_update;
 }
