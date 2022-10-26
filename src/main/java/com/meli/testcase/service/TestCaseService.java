@@ -5,6 +5,7 @@ import com.meli.testcase.repository.TestCaseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,12 +16,13 @@ public class TestCaseService implements ITestCaseService {
 
     @Override
     public TestCaseBD insert(TestCaseBD testCase) {
+        testCase.setLast_update(LocalDateTime.now());
         return repo.save(testCase);
     }
 
     @Override
     public List<TestCaseBD> findAll() {
-        return null;
+        return repo.findAll();
     }
 
     @Override
